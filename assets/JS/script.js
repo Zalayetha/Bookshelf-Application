@@ -2,9 +2,10 @@ const form = document.getElementById('form-bookshelf');
 const bookList = [];
 const RENDER_EVENT = 'renderEvent';
 const STORAGE_KEY = 'book_list';
+const bookUnread = document.getElementById('searchBookUnread');
+const bookRead = document.getElementById('searchBookRead');
 document.addEventListener('DOMContentLoaded', () => {
   form.addEventListener('submit', (e) => {
-    e.preventDefault();
     addBook();
   });
   document.addEventListener(RENDER_EVENT, () => {
@@ -22,24 +23,35 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
   if (checkStorage()) {
-    console.log('berhasil punya storage');
     loadDataFromStorage();
   }
+  bookUnread.addEventListener('keyup', () => {
+    searchBookUnread();
+  });
+  bookRead.addEventListener('keyup', () => {
+    searchBookRead();
+  });
 });
 
 function addBook() {
+  let idBook;
+  const inputIdBook = document.getElementById('inputIdBook').value;
   const inputBookTitle = document.getElementById('inputBookTitle').value;
   const inputBookAuthor = document.getElementById('inputBookAuthor').value;
   const inputBookYear = document.getElementById('inputBookYear').value;
   const checkReaded = get_valueCheckReadedBook();
-  const id = generateBookId();
+  if (inputIdBook === '') {
+    idBook = generateBookId();
+  } else {
+    idBook = Number(inputIdBook);
+  }
   if (checkReaded === true) {
-    const bookObject = generateBookObject(id, inputBookTitle, inputBookAuthor, inputBookYear, true);
+    const bookObject = generateBookObject(idBook, inputBookTitle, inputBookAuthor, inputBookYear, true);
 
     bookList.push(bookObject);
     document.dispatchEvent(new Event(RENDER_EVENT));
   } else {
-    const bookObject = generateBookObject(id, inputBookTitle, inputBookAuthor, inputBookYear, false);
+    const bookObject = generateBookObject(idBook, inputBookTitle, inputBookAuthor, inputBookYear, false);
 
     bookList.push(bookObject);
     document.dispatchEvent(new Event(RENDER_EVENT));
@@ -65,6 +77,7 @@ function makeBookShelf(book) {
   textContainer.classList.add('textContainer');
   const titleText = document.createElement('h3');
   titleText.innerText = book.title;
+  titleText.setAttribute('class', 'titleBook');
   const authorText = document.createElement('h4');
   authorText.innerText = 'By  ' + ' ' + book.author;
   const yearText = document.createElement('p');
@@ -82,9 +95,10 @@ function makeBookShelf(book) {
   const editButton = document.createElement('button');
   editButton.classList.add('edit-button');
   editButton.addEventListener('click', () => {
-    window.location.href = 'editbook.html';
+    editBook(book.id);
   });
   if (!book.isComplete) {
+    textContainer.classList.add('unreadBook');
     const checkRead = document.createElement('button');
     checkRead.classList.add('check-button');
     checkRead.addEventListener('click', () => {
@@ -92,6 +106,7 @@ function makeBookShelf(book) {
     });
     textContainer.append(titleText, authorText, yearText, checkRead, deleteButton, editButton);
   } else {
+    textContainer.classList.add('readBook');
     const undoButton = document.createElement('button');
     undoButton.classList.add('undo-button');
     undoButton.addEventListener('click', () => {
@@ -110,7 +125,8 @@ function checkStorage() {
   return true;
 }
 function get_valueCheckReadedBook() {
-  const alreadyRead = document.querySelector('#alreadyRead-checkBox');
+  const alreadyRead = document.getElementById('alreadyRead-checkBox');
+  console.log(alreadyRead);
   if (alreadyRead.checked === true) {
     return true;
   } else {
@@ -181,4 +197,62 @@ function loadDataFromStorage() {
   }
 
   document.dispatchEvent(new Event(RENDER_EVENT));
+}
+function editBook(id) {
+  try {
+    const bookIndex = findIndexBook(id);
+    const { id: idBook, title, author, year, isComplete } = bookList[bookIndex];
+    if (bookIndex === null) {
+      return;
+    }
+    if (bookList[bookIndex].id === id) {
+      if (isComplete === true) {
+        document.getElementById('alreadyRead-checkBox').checked = true;
+      } else {
+        document.getElementById('alreadyRead-checkBox').checked = false;
+      }
+    }
+
+    inputIdBook.value = idBook;
+    inputBookTitle.value = title;
+    inputBookAuthor.value = author;
+    inputBookYear.value = year;
+    bookList.splice(bookIndex, 1);
+    console.log(bookList);
+    form.scrollIntoView({
+      behavior: 'smooth',
+    });
+  } catch (error) {
+    alert('Error');
+  }
+}
+
+function searchBookUnread() {
+  const filter = bookUnread.value.toUpperCase();
+  const bookTitle = document.getElementsByClassName('titleBook');
+  const container = document.getElementsByClassName('unreadBook');
+  for (i = 0; i < container.length; i++) {
+    const book = bookTitle[i];
+    txtValue = book.textContent || book.innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      container[i].style.display = '';
+    } else {
+      container[i].style.display = 'none';
+    }
+  }
+}
+
+function searchBookRead() {
+  const filter = bookRead.value.toUpperCase();
+  const bookTitle = document.getElementsByClassName('titleBook');
+  const container = document.getElementsByClassName('readBook');
+  for (i = 0; i < container.length; i++) {
+    const book = bookTitle[i];
+    txtValue = book.textContent || book.innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      container[i].style.display = '';
+    } else {
+      container[i].style.display = 'none';
+    }
+  }
 }

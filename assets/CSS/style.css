@@ -40,8 +40,9 @@ hr {
   margin: 0 auto;
   background-color: rgba(92, 61, 46, 1);
   padding: 30px;
-  margin-top: 20px;
+  margin-top: 25px;
   border-radius: 20px;
+  margin-bottom: 25px;
 }
 #addBook-container {
   text-align: center;

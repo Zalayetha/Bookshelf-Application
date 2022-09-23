@@ -21,6 +21,10 @@
           <hr />
           <div class="container" id="addBook-container">
             <form action="" id="form-bookshelf">
+              <div class="input" hidden>
+                <label for="inputIdBook">id</label>
+                <input id="inputIdBook" type="text" placeholder="input here" />
+              </div>
               <div class="input">
                 <label for="inputBookTitle">Book Title</label>
                 <input id="inputBookTitle" type="text" required placeholder="input here" />
@@ -53,7 +57,7 @@
                     <button class="searchButton"></button>
                   </td>
                   <td>
-                    <input type="text" placeholder="Search" />
+                    <input type="text" placeholder="Search By Book Title" id="searchBookUnread" />
                   </td>
                 </tr>
               </table>
@@ -73,7 +77,7 @@
                     <button class="searchButton"></button>
                   </td>
                   <td>
-                    <input type="text" placeholder="Search" />
+                    <input type="text" placeholder="Search By Book Title" id="searchBookRead" />
                   </td>
                 </tr>
               </table>
