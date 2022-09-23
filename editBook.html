@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/CSS/style.css" />
+    <title>Bookshelf Apps</title>
+  </head>
+  <body>
+    <header>
+      <div id="title-bar">
+        <h1>Bookshelf Apps</h1>
+      </div>
+    </header>
+    <main>
+      <div id="content">
+        <section id="add-book">
+          <h2>Edit Book</h2>
+          <br />
+          <hr />
+          <div class="container" id="addBook-container">
+            <form action="" id="form-bookshelf">
+              <div class="input">
+                <label for="inputBookTitle">Book Title</label>
+                <input id="inputBookTitle" type="text" required placeholder="input here" />
+              </div>
+              <div class="input">
+                <label for="inputBookAuthor">Author</label>
+                <input id="inputBookAuthor" type="text" required placeholder="input here" />
+              </div>
+              <div class="input">
+                <label for="inputBookYear">Year</label>
+                <input id="inputBookYear" type="number" required placeholder="input here" />
+              </div>
+              <div class="checkbox">
+                <input type="checkbox" name="alreadyRead-checkBox" id="alreadyRead-checkBox" />
+                <label for="alreadyRead-checkBox">Already Read</label>
+              </div>
+              <input type="submit" value="Add Book to Shelf" id="submit" />
+            </form>
+          </div>
+        </section>
+      </div>
+    </main>
+    <script src="assets/JS/scriptEdit.js"></script>
+  </body>
+</html>

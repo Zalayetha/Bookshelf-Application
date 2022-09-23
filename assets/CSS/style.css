@@ -1,0 +1,179 @@
+@font-face {
+  font-family: 'noto';
+  src: url(../fonts/NotoSerif-Bold.ttf);
+}
+* {
+  font-family: 'noto', sans-serif;
+  /* color: white; */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: rgba(92, 61, 46, 0.8);
+  color: white;
+  box-sizing: border-box;
+}
+header #title-bar {
+  background-color: rgba(92, 61, 46, 1);
+  text-align: center;
+  padding: 15px 0;
+}
+
+section {
+  padding-top: 100px;
+}
+#add-book h2,
+#unread h2,
+#already-read h2 {
+  text-align: center;
+}
+hr {
+  width: 100px;
+  height: 4px;
+  background-color: white;
+  border-radius: 20px;
+  margin: 0 auto;
+}
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: rgba(92, 61, 46, 1);
+  padding: 30px;
+  margin-top: 20px;
+  border-radius: 20px;
+}
+#addBook-container {
+  text-align: center;
+}
+#addBook-container form .input input {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+}
+#addBook-container form .input {
+  margin: 20px 0;
+  padding: 10px;
+}
+#addBook-container .checkbox {
+  text-align: left;
+  margin-left: 15px;
+}
+#addBook-container form #submit {
+  background-color: rgba(64, 34, 24, 1);
+  color: white;
+  border: 0;
+  border-radius: 5px;
+  display: block;
+  max-width: 300px;
+  padding: 8px;
+  margin: 0 auto;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+#addBook-container form #submit:hover {
+  background-color: rgba(92, 61, 46, 0.8);
+  border: 1px solid white;
+}
+label {
+  font-size: 20px;
+}
+
+.search-bar {
+  max-width: 800px;
+}
+.search-bar input {
+  width: 300px;
+  padding: 8px;
+  background-color: rgba(92, 61, 46, 1);
+  border: none;
+  border-bottom: 1px solid white;
+  outline: none;
+  color: white;
+  margin-left: 25px;
+}
+.checkbox label {
+  font-size: 15px;
+}
+
+#unread-book {
+  padding: 10px;
+}
+.textContainer {
+  background-color: rgba(64, 34, 24, 1);
+  max-width: 600px;
+  padding: 30px;
+  margin: 0 auto;
+  margin-top: 25px;
+}
+.check-button {
+  width: 40px;
+  height: 40px;
+  margin-top: 15px;
+  background: url('../img/checkButton.svg');
+  background-size: contain;
+  margin-left: auto;
+  cursor: pointer;
+  border: none;
+}
+
+.check-button:hover {
+  background: url('../img/checkButtonHover.svg');
+  background-size: contain;
+}
+.delete-button {
+  width: 40px;
+  height: 40px;
+  margin-top: 15px;
+  background: url('../img/deleteButton.svg');
+  background-size: contain;
+  margin-left: 10px;
+  cursor: pointer;
+  border: none;
+}
+
+.delete-button:hover {
+  background: url('../img/deleteButtonHover.svg');
+  background-size: contain;
+}
+.edit-button {
+  width: 40px;
+  height: 40px;
+  margin-top: 15px;
+  background: url('../img/editButton.svg');
+  background-size: contain;
+  margin-left: 10px;
+  cursor: pointer;
+  border: none;
+}
+
+.edit-button:hover {
+  background: url('../img/editButtonHover.svg');
+  background-size: contain;
+}
+.undo-button {
+  width: 40px;
+  height: 40px;
+  margin-top: 15px;
+  background: url('../img/undoButton.svg');
+  background-size: contain;
+  margin-left: auto;
+  cursor: pointer;
+  border: none;
+}
+
+.undo-button:hover {
+  background: url('../img/undoButtonHover.svg');
+  background-size: contain;
+}
+.searchButton {
+  width: 40px;
+  height: 40px;
+  margin-top: 15px;
+  background: url('../img/searchIcon.svg');
+  background-size: contain;
+  margin-left: auto;
+  cursor: pointer;
+  border: none;
+}
