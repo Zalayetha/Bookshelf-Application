@@ -2,11 +2,13 @@ const form = document.getElementById('form-bookshelf');
 const bookList = [];
 const RENDER_EVENT = 'renderEvent';
 const STORAGE_KEY = 'book_list';
+const SAVE_EVENT = 'saveEvent';
 const bookUnread = document.getElementById('searchBookUnread');
 const bookRead = document.getElementById('searchBookRead');
 document.addEventListener('DOMContentLoaded', () => {
   form.addEventListener('submit', (e) => {
     addBook();
+    document.dispatchEvent(new Event(SAVE_EVENT));
   });
   document.addEventListener(RENDER_EVENT, () => {
     const unreadBook = document.getElementById('unread-book');
@@ -21,6 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
         unreadBook.append(container);
       }
     }
+  });
+  document.addEventListener(SAVE_EVENT, () => {
+    alert('Berhasil Menambahkan Data ');
   });
   if (checkStorage()) {
     loadDataFromStorage();
@@ -115,6 +120,7 @@ function makeBookShelf(book) {
 
     textContainer.append(titleText, authorText, yearText, undoButton, deleteButton, editButton);
   }
+
   return textContainer;
 }
 function checkStorage() {
@@ -228,31 +234,32 @@ function editBook(id) {
 }
 
 function searchBookUnread() {
-  const filter = bookUnread.value.toUpperCase();
-  const bookTitle = document.getElementsByClassName('titleBook');
-  const container = document.getElementsByClassName('unreadBook');
-  for (i = 0; i < container.length; i++) {
-    const book = bookTitle[i];
-    txtValue = book.textContent || book.innerText;
+  let filter = bookUnread.value.toUpperCase();
+  let bookTitle = document.querySelectorAll('.unreadBook');
+  for (i = 0; i < bookTitle.length; i++) {
+    let book = bookTitle[i];
+    let txtValue = book.textContent || book.innerText;
     if (txtValue.toUpperCase().indexOf(filter) > -1) {
-      container[i].style.display = '';
+      bookTitle[i].style.display = '';
+      console.log(txtValue.toUpperCase().indexOf(filter));
     } else {
-      container[i].style.display = 'none';
+      bookTitle[i].style.display = 'none';
     }
   }
 }
 
 function searchBookRead() {
-  const filter = bookRead.value.toUpperCase();
-  const bookTitle = document.getElementsByClassName('titleBook');
-  const container = document.getElementsByClassName('readBook');
-  for (i = 0; i < container.length; i++) {
-    const book = bookTitle[i];
-    txtValue = book.textContent || book.innerText;
+  let filter = bookRead.value.toUpperCase();
+  let bookTitle = document.querySelectorAll('.readBook');
+  for (i = 0; i < bookTitle.length; i++) {
+    let book = bookTitle[i];
+    let txtValue = book.textContent || book.innerText;
     if (txtValue.toUpperCase().indexOf(filter) > -1) {
-      container[i].style.display = '';
+      bookTitle[i].style.display = '';
+      console.log(txtValue.toUpperCase().indexOf(filter));
     } else {
-      container[i].style.display = 'none';
+      bookTitle[i].style.display = 'none';
+      console.log(txtValue.toUpperCase().indexOf(filter));
     }
   }
 }
